@@ -48,5 +48,12 @@ describe('async-early-error', function() {
 			cb(null, 1);
 			expect(spy2).was.calledWith(1);
 		});
+		it('should call second callback with extra arguments', function() {
+			var spy1 = sinon.spy();
+			var spy2 = sinon.stub();
+			var cb = asyncEarlyError(spy1, spy2);
+			cb(null, 1, 2);
+			expect(spy2).was.calledWith(1, 2);
+		});
 	});
 });
