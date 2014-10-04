@@ -1,4 +1,6 @@
-module.exports = function asyncEarlyError(errback, callback) {
+var curry = require('curry');
+
+module.exports = curry(function asyncEarlyError(errback, callback) {
 	return function(err /* ...res */) {
 		var res = [].slice.call(arguments, 1);
 		if(err) {
@@ -7,4 +9,4 @@ module.exports = function asyncEarlyError(errback, callback) {
 			callback.apply(null, res);
 		}
 	};
-};
+});

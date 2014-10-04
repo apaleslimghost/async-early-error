@@ -56,4 +56,24 @@ describe('async-early-error', function() {
 			expect(spy2).was.calledWith(1, 2);
 		});
 	});
+
+	describe('currying', function() {
+		it('should be a curried function', function() {
+			var a = asyncEarlyError(function() {});
+			expect(a).to.be.a(Function);
+			expect(a(function() {})).to.be.a(Function);
+		});
+
+		it('should work with currying', function() {
+			var spy1 = sinon.spy();
+			var spy2 = sinon.spy();
+			var spy3 = sinon.spy();
+			var a = asyncEarlyError(spy1)
+			a(spy2)(null);
+			expect(spy1).was.notCalled();
+			expect(spy2).was.called();
+			a(spy3)(null);
+			expect(spy3).was.called();
+		});
+	});
 });
