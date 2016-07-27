@@ -13,8 +13,8 @@ function statAndRead(file, cb) {
 	fs.stat(file, handleErr(function(stat) {
 		fs.readFile(file, handleErr(function(data) {
 			cb(null, stat, data);
-		});
-	});
+		}));
+	}));
 }
 ```
 
